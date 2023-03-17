@@ -6,12 +6,11 @@
  * Please read COPYING and README for further details.
  */
 
-struct MiscData
-{
-	Anope::string object;
-	Anope::string name;
-	Anope::string data;
+struct MiscData {
+    Anope::string object;
+    Anope::string name;
+    Anope::string data;
 
-	MiscData() { }
-	virtual ~MiscData() { }
+    MiscData() { }
+    virtual ~MiscData() { }
 };

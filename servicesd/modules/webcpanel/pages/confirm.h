@@ -7,15 +7,14 @@
 
 #include "modules/httpd.h"
 
-namespace WebCPanel
-{
+namespace WebCPanel {
 
-class Confirm : public WebPanelPage
-{
- public:
-	Confirm(const Anope::string &u) : WebPanelPage(u) { }
+class Confirm : public WebPanelPage {
+  public:
+    Confirm(const Anope::string &u) : WebPanelPage(u) { }
 
-	bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *, HTTPMessage &, HTTPReply &) anope_override;
+    bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *,
+                   HTTPMessage &, HTTPReply &) anope_override;
 };
 
 }

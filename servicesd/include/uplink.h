@@ -15,38 +15,34 @@
 #include "sockets.h"
 #include "protocol.h"
 
-namespace Uplink
-{
-	extern void Connect();
+namespace Uplink {
+extern void Connect();
 }
 
 /* This is the socket to our uplink */
-class UplinkSocket : public ConnectionSocket, public BufferedSocket
-{
- public:
-	bool error;
-	UplinkSocket();
-	~UplinkSocket();
-	bool ProcessRead() anope_override;
-	void OnConnect() anope_override;
-	void OnError(const Anope::string &) anope_override;
+class UplinkSocket : public ConnectionSocket, public BufferedSocket {
+  public:
+    bool error;
+    UplinkSocket();
+    ~UplinkSocket();
+    bool ProcessRead() anope_override;
+    void OnConnect() anope_override;
+    void OnError(const Anope::string &) anope_override;
 
-	/* A message sent over the uplink socket */
-	class CoreExport Message
-	{
-		MessageSource source;
-		std::stringstream buffer;
+    /* A message sent over the uplink socket */
+    class CoreExport Message {
+        MessageSource source;
+        std::stringstream buffer;
 
-	 public:
-		Message();
-		Message(const MessageSource &);
-		~Message();
-		template<typename T> Message &operator<<(const T &val)
-		{
-			this->buffer << val;
-			return *this;
-		}
-	};
+      public:
+        Message();
+        Message(const MessageSource &);
+        ~Message();
+        template<typename T> Message &operator<<(const T &val) {
+            this->buffer << val;
+            return *this;
+        }
+    };
 };
 extern CoreExport UplinkSocket *UplinkSock;
 

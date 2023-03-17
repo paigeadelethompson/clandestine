@@ -11,57 +11,55 @@
 
 #include "module.h"
 
-namespace
-{
-	ServiceReference<MemoServService> memoserv("MemoServService", "MemoServ");
+namespace {
+ServiceReference<MemoServService> memoserv("MemoServService", "MemoServ");
 }
 
-class CommandMSStaff : public Command
-{
- public:
-	CommandMSStaff(Module *creator) : Command(creator, "memoserv/staff", 1, 1)
-	{
-		this->SetDesc(_("Send a memo to all opers/admins"));
-		this->SetSyntax(_("\037memo-text\037"));
-	}
+class CommandMSStaff : public Command {
+  public:
+    CommandMSStaff(Module *creator) : Command(creator, "memoserv/staff", 1, 1) {
+        this->SetDesc(_("Send a memo to all opers/admins"));
+        this->SetSyntax(_("\037memo-text\037"));
+    }
 
-	void Execute(CommandSource &source, const std::vector<Anope::string> &params) anope_override
-	{
-		if (!memoserv)
-			return;
+    void Execute(CommandSource &source,
+                 const std::vector<Anope::string> &params) anope_override {
+        if (!memoserv) {
+            return;
+        }
 
-		const Anope::string &text = params[0];
+        const Anope::string &text = params[0];
 
-		for (nickcore_map::const_iterator it = NickCoreList->begin(), it_end = NickCoreList->end(); it != it_end; ++it)
-		{
-			const NickCore *nc = it->second;
+        for (nickcore_map::const_iterator it = NickCoreList->begin(), it_end = NickCoreList->end(); it != it_end; ++it) {
+            const NickCore *nc = it->second;
 
-			if (source.nc != nc && nc->IsServicesOper())
-				memoserv->Send(source.GetNick(), nc->display, text, true);
-		}
-	}
+            if (source.nc != nc && nc->IsServicesOper()) {
+                memoserv->Send(source.GetNick(), nc->display, text, true);
+            }
+        }
+    }
 
-	bool OnHelp(CommandSource &source, const Anope::string &subcommand) anope_override
-	{
-		this->SendSyntax(source);
-		source.Reply(" ");
-		source.Reply(_("Sends all services staff a memo containing \037memo-text\037."));
+    bool OnHelp(CommandSource &source,
+                const Anope::string &subcommand) anope_override {
+        this->SendSyntax(source);
+        source.Reply(" ");
+        source.Reply(_("Sends all services staff a memo containing \037memo-text\037."));
 
-		return true;
-	}
+        return true;
+    }
 };
 
-class MSStaff : public Module
-{
-	CommandMSStaff commandmsstaff;
+class MSStaff : public Module {
+    CommandMSStaff commandmsstaff;
 
- public:
-	MSStaff(const Anope::string &modname, const Anope::string &creator) : Module(modname, creator, VENDOR),
-		commandmsstaff(this)
-	{
-		if (!memoserv)
-			throw ModuleException("No MemoServ!");
-	}
+  public:
+    MSStaff(const Anope::string &modname,
+            const Anope::string &creator) : Module(modname, creator, VENDOR),
+        commandmsstaff(this) {
+        if (!memoserv) {
+            throw ModuleException("No MemoServ!");
+        }
+    }
 };
 
 MODULE_INIT(MSStaff)

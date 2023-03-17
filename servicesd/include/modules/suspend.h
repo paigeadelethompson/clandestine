@@ -9,11 +9,10 @@
  * Based on the original code of Services by Andy Church.
  */
 
-struct SuspendInfo
-{
-	Anope::string what, by, reason;
-	time_t when, expires;
+struct SuspendInfo {
+    Anope::string what, by, reason;
+    time_t when, expires;
 
-	SuspendInfo() { }
-	virtual ~SuspendInfo() { }
+    SuspendInfo() { }
+    virtual ~SuspendInfo() { }
 };

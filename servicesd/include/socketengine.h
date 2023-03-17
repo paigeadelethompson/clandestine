@@ -15,36 +15,35 @@
 #include "services.h"
 #include "sockets.h"
 
-class CoreExport SocketEngine
-{
-	static const int DefaultSize = 2; // Uplink, mode stacker
- public:
-	/* Map of sockets */
-	static std::map<int, Socket *> Sockets;
+class CoreExport SocketEngine {
+    static const int DefaultSize = 2; // Uplink, mode stacker
+  public:
+    /* Map of sockets */
+    static std::map<int, Socket *> Sockets;
 
-	/** Called to initialize the socket engine
-	 */
-	static void Init();
+    /** Called to initialize the socket engine
+     */
+    static void Init();
 
-	/** Called to shutdown the socket engine
-	 */
-	static void Shutdown();
+    /** Called to shutdown the socket engine
+     */
+    static void Shutdown();
 
-	/** Set a flag on a socket
-	 * @param s The socket
-	 * @param set Whether setting or unsetting
-	 * @param flag The flag to set or unset
-	 */
-	static void Change(Socket *s, bool set, SocketFlag flag);
+    /** Set a flag on a socket
+     * @param s The socket
+     * @param set Whether setting or unsetting
+     * @param flag The flag to set or unset
+     */
+    static void Change(Socket *s, bool set, SocketFlag flag);
 
-	/** Read from sockets and do things
-	 */
-	static void Process();
+    /** Read from sockets and do things
+     */
+    static void Process();
 
-	static int GetLastError();
-	static void SetLastError(int);
+    static int GetLastError();
+    static void SetLastError(int);
 
-	static bool IgnoreErrno();
+    static bool IgnoreErrno();
 };
 
 #endif // SOCKETENGINE_H

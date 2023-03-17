@@ -7,36 +7,32 @@
 
 #include "../../webcpanel.h"
 
-namespace
-{
-	bool ChannelSort(ChannelInfo *ci1, ChannelInfo *ci2)
-	{
-		return ci::less()(ci1->name, ci2->name);
-	}
+namespace {
+bool ChannelSort(ChannelInfo *ci1, ChannelInfo *ci2) {
+    return ci::less()(ci1->name, ci2->name);
+}
 }
 
-namespace WebCPanel
-{
+namespace WebCPanel {
 
-namespace ChanServ
-{
+namespace ChanServ {
 
-void BuildChanList(NickAlias *na, TemplateFileServer::Replacements &replacements)
-{
-	std::deque<ChannelInfo *> queue;
-	na->nc->GetChannelReferences(queue);
-	std::sort(queue.begin(), queue.end(), ChannelSort);
+void BuildChanList(NickAlias *na,
+                   TemplateFileServer::Replacements &replacements) {
+    std::deque<ChannelInfo *> queue;
+    na->nc->GetChannelReferences(queue);
+    std::sort(queue.begin(), queue.end(), ChannelSort);
 
-	for (unsigned i = 0; i < queue.size(); ++i)
-	{
-		ChannelInfo *ci = queue[i];
+    for (unsigned i = 0; i < queue.size(); ++i) {
+        ChannelInfo *ci = queue[i];
 
-		if (na->nc != ci->GetFounder() && ci->AccessFor(na->nc).empty())
-			continue;
+        if (na->nc != ci->GetFounder() && ci->AccessFor(na->nc).empty()) {
+            continue;
+        }
 
-		replacements["CHANNEL_NAMES"] = ci->name;
-		replacements["ESCAPED_CHANNEL_NAMES"] = HTTPUtils::URLEncode(ci->name);
-	}
+        replacements["CHANNEL_NAMES"] = ci->name;
+        replacements["ESCAPED_CHANNEL_NAMES"] = HTTPUtils::URLEncode(ci->name);
+    }
 }
 
 }

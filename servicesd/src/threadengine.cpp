@@ -17,120 +17,101 @@
 #include <pthread.h>
 #endif
 
-static inline pthread_attr_t *get_engine_attr()
-{
-	/* Threadengine attributes used by this thread engine */
-	static pthread_attr_t attr;
-	static bool inited = false;
+static inline pthread_attr_t *get_engine_attr() {
+    /* Threadengine attributes used by this thread engine */
+    static pthread_attr_t attr;
+    static bool inited = false;
 
-	if (inited == false)
-	{
-		if (pthread_attr_init(&attr))
-			throw CoreException("Error calling pthread_attr_init");
-		if (pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE))
-			throw CoreException("Unable to mark threads as joinable");
-		inited = true;
-	}
+    if (inited == false) {
+        if (pthread_attr_init(&attr)) {
+            throw CoreException("Error calling pthread_attr_init");
+        }
+        if (pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE)) {
+            throw CoreException("Unable to mark threads as joinable");
+        }
+        inited = true;
+    }
 
-	return &attr;
+    return &attr;
 }
 
-static void *entry_point(void *parameter)
-{
-	Thread *thread = static_cast<Thread *>(parameter);
-	thread->Run();
-	thread->SetExitState();
-	pthread_exit(0);
-	return NULL;
+static void *entry_point(void *parameter) {
+    Thread *thread = static_cast<Thread *>(parameter);
+    thread->Run();
+    thread->SetExitState();
+    pthread_exit(0);
+    return NULL;
 }
 
-Thread::Thread() : exit(false)
-{
+Thread::Thread() : exit(false) {
 }
 
-Thread::~Thread()
-{
+Thread::~Thread() {
 }
 
-void Thread::Join()
-{
-	this->SetExitState();
-	pthread_join(handle, NULL);
+void Thread::Join() {
+    this->SetExitState();
+    pthread_join(handle, NULL);
 }
 
-void Thread::SetExitState()
-{
-	this->Notify();
-	exit = true;
+void Thread::SetExitState() {
+    this->Notify();
+    exit = true;
 }
 
-void Thread::Exit()
-{
-	this->SetExitState();
-	pthread_exit(0);
+void Thread::Exit() {
+    this->SetExitState();
+    pthread_exit(0);
 }
 
-void Thread::Start()
-{
-	if (pthread_create(&this->handle, get_engine_attr(), entry_point, this))
-	{
-		this->flags[SF_DEAD] = true;
-		throw CoreException("Unable to create thread: " + Anope::LastError());
-	}
+void Thread::Start() {
+    if (pthread_create(&this->handle, get_engine_attr(), entry_point, this)) {
+        this->flags[SF_DEAD] = true;
+        throw CoreException("Unable to create thread: " + Anope::LastError());
+    }
 }
 
-bool Thread::GetExitState() const
-{
-	return exit;
+bool Thread::GetExitState() const {
+    return exit;
 }
 
-void Thread::OnNotify()
-{
-	this->Join();
-	this->flags[SF_DEAD] = true;
+void Thread::OnNotify() {
+    this->Join();
+    this->flags[SF_DEAD] = true;
 }
 
-Mutex::Mutex()
-{
-	pthread_mutex_init(&mutex, NULL);
+Mutex::Mutex() {
+    pthread_mutex_init(&mutex, NULL);
 }
 
-Mutex::~Mutex()
-{
-	pthread_mutex_destroy(&mutex);
+Mutex::~Mutex() {
+    pthread_mutex_destroy(&mutex);
 }
 
-void Mutex::Lock()
-{
-	pthread_mutex_lock(&mutex);
+void Mutex::Lock() {
+    pthread_mutex_lock(&mutex);
 }
 
-void Mutex::Unlock()
-{
-	pthread_mutex_unlock(&mutex);
+void Mutex::Unlock() {
+    pthread_mutex_unlock(&mutex);
 }
 
-bool Mutex::TryLock()
-{
-	return pthread_mutex_trylock(&mutex) == 0;
+bool Mutex::TryLock() {
+    return pthread_mutex_trylock(&mutex) == 0;
 }
 
-Condition::Condition() : Mutex()
-{
-	pthread_cond_init(&cond, NULL);
+Condition::Condition() : Mutex() {
+    pthread_cond_init(&cond, NULL);
 }
 
-Condition::~Condition()
-{
-	pthread_cond_destroy(&cond);
+Condition::~Condition() {
+    pthread_cond_destroy(&cond);
 }
 
-void Condition::Wakeup()
-{
-	pthread_cond_signal(&cond);
+void Condition::Wakeup() {
+    pthread_cond_signal(&cond);
 }
 
-void Condition::Wait()
-{
-	pthread_cond_wait(&cond, &mutex);
+void Condition::Wait() {
+    pthread_cond_wait(&cond, &mutex);
 }

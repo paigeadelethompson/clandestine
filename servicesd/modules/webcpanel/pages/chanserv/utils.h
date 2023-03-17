@@ -5,11 +5,9 @@
  * Please read COPYING and README for further details.
  */
 
-namespace WebCPanel
-{
+namespace WebCPanel {
 
-namespace ChanServ
-{
+namespace ChanServ {
 
 extern void BuildChanList(NickAlias *, TemplateFileServer::Replacements &);
 

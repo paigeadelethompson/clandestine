@@ -5,18 +5,17 @@
  * Please read COPYING and README for further details.
  */
 
-namespace WebCPanel
-{
+namespace WebCPanel {
 
-namespace OperServ
-{
+namespace OperServ {
 
-class Akill : public WebPanelProtectedPage
-{
- public:
-	Akill(const Anope::string &cat, const Anope::string &u);
+class Akill : public WebPanelProtectedPage {
+  public:
+    Akill(const Anope::string &cat, const Anope::string &u);
 
-	bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *, HTTPMessage &, HTTPReply &, NickAlias *, TemplateFileServer::Replacements &) anope_override;
+    bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *,
+                   HTTPMessage &, HTTPReply &, NickAlias *,
+                   TemplateFileServer::Replacements &) anope_override;
 };
 
 }

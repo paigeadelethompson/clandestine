@@ -7,15 +7,14 @@
 
 #include "modules/httpd.h"
 
-namespace WebCPanel
-{
+namespace WebCPanel {
 
-class Register : public WebPanelPage
-{
- public:
-	Register(const Anope::string &u) : WebPanelPage(u) { }
+class Register : public WebPanelPage {
+  public:
+    Register(const Anope::string &u) : WebPanelPage(u) { }
 
-	bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *, HTTPMessage &, HTTPReply &) anope_override;
+    bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *,
+                   HTTPMessage &, HTTPReply &) anope_override;
 };
 
 }

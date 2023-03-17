@@ -11,42 +11,39 @@
 
 #include "module.h"
 
-class CommandOSUpdate : public Command
-{
- public:
-	CommandOSUpdate(Module *creator) : Command(creator, "operserv/update", 0, 0)
-	{
-		this->SetDesc(_("Force the Services databases to be updated immediately"));
-	}
+class CommandOSUpdate : public Command {
+  public:
+    CommandOSUpdate(Module *creator) : Command(creator, "operserv/update", 0, 0) {
+        this->SetDesc(_("Force the Services databases to be updated immediately"));
+    }
 
-	void Execute(CommandSource &source, const std::vector<Anope::string> &params) anope_override
-	{
-		Log(LOG_ADMIN, source, this);
-		source.Reply(_("Updating databases."));
-		Anope::SaveDatabases();
-		return;
-	}
+    void Execute(CommandSource &source,
+                 const std::vector<Anope::string> &params) anope_override {
+        Log(LOG_ADMIN, source, this);
+        source.Reply(_("Updating databases."));
+        Anope::SaveDatabases();
+        return;
+    }
 
-	bool OnHelp(CommandSource &source, const Anope::string &subcommand) anope_override
-	{
-		this->SendSyntax(source);
-		source.Reply(" ");
-		source.Reply(_("Causes Services to update all database files as soon as you\n"
-				"send the command."));
-		return true;
-	}
+    bool OnHelp(CommandSource &source,
+                const Anope::string &subcommand) anope_override {
+        this->SendSyntax(source);
+        source.Reply(" ");
+        source.Reply(_("Causes Services to update all database files as soon as you\n"
+                       "send the command."));
+        return true;
+    }
 };
 
-class OSUpdate : public Module
-{
-	CommandOSUpdate commandosupdate;
+class OSUpdate : public Module {
+    CommandOSUpdate commandosupdate;
 
- public:
-	OSUpdate(const Anope::string &modname, const Anope::string &creator) : Module(modname, creator, VENDOR),
-		commandosupdate(this)
-	{
+  public:
+    OSUpdate(const Anope::string &modname,
+             const Anope::string &creator) : Module(modname, creator, VENDOR),
+        commandosupdate(this) {
 
-	}
+    }
 };
 
 MODULE_INIT(OSUpdate)

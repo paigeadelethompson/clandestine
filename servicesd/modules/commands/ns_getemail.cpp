@@ -15,60 +15,58 @@
 
 #include "module.h"
 
-class CommandNSGetEMail : public Command
-{
- public:
-	CommandNSGetEMail(Module *creator) : Command(creator, "nickserv/getemail", 1, 1)
-	{
-		this->SetDesc(_("Matches and returns all users that registered using given email"));
-		this->SetSyntax(_("\037email\037"));
-	}
+class CommandNSGetEMail : public Command {
+  public:
+    CommandNSGetEMail(Module *creator) : Command(creator, "nickserv/getemail", 1,
+                1) {
+        this->SetDesc(
+            _("Matches and returns all users that registered using given email"));
+        this->SetSyntax(_("\037email\037"));
+    }
 
-	void Execute(CommandSource &source, const std::vector<Anope::string> &params) anope_override
-	{
-		const Anope::string &email = params[0];
-		int j = 0;
+    void Execute(CommandSource &source,
+                 const std::vector<Anope::string> &params) anope_override {
+        const Anope::string &email = params[0];
+        int j = 0;
 
-		Log(LOG_ADMIN, source, this) << "on " << email;
+        Log(LOG_ADMIN, source, this) << "on " << email;
 
-		for (nickcore_map::const_iterator it = NickCoreList->begin(), it_end = NickCoreList->end(); it != it_end; ++it)
-		{
-			const NickCore *nc = it->second;
+        for (nickcore_map::const_iterator it = NickCoreList->begin(), it_end = NickCoreList->end(); it != it_end; ++it) {
+            const NickCore *nc = it->second;
 
-			if (!nc->email.empty() && Anope::Match(nc->email, email))
-			{
-				++j;
-				source.Reply(_("Email matched: \002%s\002 (\002%s\002) to \002%s\002."), nc->display.c_str(), nc->email.c_str(), email.c_str());
-			}
-		}
+            if (!nc->email.empty() && Anope::Match(nc->email, email)) {
+                ++j;
+                source.Reply(_("Email matched: \002%s\002 (\002%s\002) to \002%s\002."),
+                             nc->display.c_str(), nc->email.c_str(), email.c_str());
+            }
+        }
 
-		if (j <= 0)
-		{
-			source.Reply(_("No registrations matching \002%s\002 were found."), email.c_str());
-			return;
-		}
+        if (j <= 0) {
+            source.Reply(_("No registrations matching \002%s\002 were found."),
+                         email.c_str());
+            return;
+        }
 
-		return;
-	}
+        return;
+    }
 
-	bool OnHelp(CommandSource &source, const Anope::string &subcommand) anope_override
-	{
-		this->SendSyntax(source);
-		source.Reply(" ");
-		source.Reply(_("Returns the matching accounts that used given email."));
-		return true;
-	}
+    bool OnHelp(CommandSource &source,
+                const Anope::string &subcommand) anope_override {
+        this->SendSyntax(source);
+        source.Reply(" ");
+        source.Reply(_("Returns the matching accounts that used given email."));
+        return true;
+    }
 };
 
-class NSGetEMail : public Module
-{
-	CommandNSGetEMail commandnsgetemail;
- public:
-	NSGetEMail(const Anope::string &modname, const Anope::string &creator) : Module(modname, creator, VENDOR),
-		commandnsgetemail(this)
-	{
+class NSGetEMail : public Module {
+    CommandNSGetEMail commandnsgetemail;
+  public:
+    NSGetEMail(const Anope::string &modname,
+               const Anope::string &creator) : Module(modname, creator, VENDOR),
+        commandnsgetemail(this) {
 
-	}
+    }
 };
 
 MODULE_INIT(NSGetEMail)

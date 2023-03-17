@@ -16,30 +16,29 @@
 #include "anope.h"
 #include "service.h"
 
-class RegexException : public CoreException
-{
- public:
-	RegexException(const Anope::string &reason = "") : CoreException(reason) { }
+class RegexException : public CoreException {
+  public:
+    RegexException(const Anope::string &reason = "") : CoreException(reason) { }
 
-	virtual ~RegexException() throw() { }
+    virtual ~RegexException() throw() { }
 };
 
-class CoreExport Regex
-{
-	Anope::string expression;
- protected:
-	Regex(const Anope::string &expr) : expression(expr) { }
- public:
-	virtual ~Regex() { }
-	const Anope::string &GetExpression() { return expression; }
-	virtual bool Matches(const Anope::string &str) = 0;
+class CoreExport Regex {
+    Anope::string expression;
+  protected:
+    Regex(const Anope::string &expr) : expression(expr) { }
+  public:
+    virtual ~Regex() { }
+    const Anope::string &GetExpression() {
+        return expression;
+    }
+    virtual bool Matches(const Anope::string &str) = 0;
 };
 
-class CoreExport RegexProvider : public Service
-{
- public:
-	RegexProvider(Module *o, const Anope::string &n) : Service(o, "Regex", n) { }
-	virtual Regex *Compile(const Anope::string &) = 0;
+class CoreExport RegexProvider : public Service {
+  public:
+    RegexProvider(Module *o, const Anope::string &n) : Service(o, "Regex", n) { }
+    virtual Regex *Compile(const Anope::string &) = 0;
 };
 
 #endif // REGEXPR_H

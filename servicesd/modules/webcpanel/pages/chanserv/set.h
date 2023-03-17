@@ -5,20 +5,19 @@
  * Please read COPYING and README for further details.
  */
 
-namespace WebCPanel
-{
+namespace WebCPanel {
 
-namespace ChanServ
-{
+namespace ChanServ {
 
-class Set : public WebPanelProtectedPage
-{
- public:
-	Set(const Anope::string &cat, const Anope::string &u);
+class Set : public WebPanelProtectedPage {
+  public:
+    Set(const Anope::string &cat, const Anope::string &u);
 
-	bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *, HTTPMessage &, HTTPReply &, NickAlias *, TemplateFileServer::Replacements &) anope_override;
+    bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *,
+                   HTTPMessage &, HTTPReply &, NickAlias *,
+                   TemplateFileServer::Replacements &) anope_override;
 
-	std::set<Anope::string> GetData() anope_override;
+    std::set<Anope::string> GetData() anope_override;
 };
 
 }

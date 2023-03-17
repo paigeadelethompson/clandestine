@@ -5,18 +5,17 @@
  * Please read COPYING and README for further details.
  */
 
-namespace WebCPanel
-{
+namespace WebCPanel {
 
-namespace HostServ
-{
+namespace HostServ {
 
-class Request : public WebPanelProtectedPage
-{
- public:
-	Request(const Anope::string &cat, const Anope::string &u);
+class Request : public WebPanelProtectedPage {
+  public:
+    Request(const Anope::string &cat, const Anope::string &u);
 
-	bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *, HTTPMessage &, HTTPReply &, NickAlias *, TemplateFileServer::Replacements &) anope_override;
+    bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *,
+                   HTTPMessage &, HTTPReply &, NickAlias *,
+                   TemplateFileServer::Replacements &) anope_override;
 };
 
 }

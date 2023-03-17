@@ -21,9 +21,13 @@ struct ChanUserContainer;
 class ClientSocket;
 class Command;
 class CommandSource;
-namespace Configuration { struct Conf; }
+namespace Configuration {
+struct Conf;
+}
 class ConnectionSocket;
-namespace DNS { struct Query; }
+namespace DNS {
+struct Query;
+}
 class Entry;
 class IdentifyRequest;
 class InfoFormatter;
@@ -50,4 +54,6 @@ struct Exception;
 struct MemoInfo;
 struct ModeLock;
 struct Oper;
-namespace SASL { struct Message; }
+namespace SASL {
+struct Message;
+}

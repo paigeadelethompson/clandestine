@@ -7,16 +7,19 @@
 
 #include "../webcpanel.h"
 
-WebCPanel::Logout::Logout(const Anope::string &u) : WebPanelProtectedPage("", u)
-{
+WebCPanel::Logout::Logout(const Anope::string &u) : WebPanelProtectedPage("",
+            u) {
 }
 
-bool WebCPanel::Logout::OnRequest(HTTPProvider *server, const Anope::string &page_name, HTTPClient *client, HTTPMessage &message, HTTPReply &reply, NickAlias *na, TemplateFileServer::Replacements &replacements)
-{
-	na->Shrink<Anope::string>("webcpanel_id");
-	na->Shrink<Anope::string>("webcpanel_ip");
+bool WebCPanel::Logout::OnRequest(HTTPProvider *server,
+                                  const Anope::string &page_name, HTTPClient *client, HTTPMessage &message,
+                                  HTTPReply &reply, NickAlias *na,
+                                  TemplateFileServer::Replacements &replacements) {
+    na->Shrink<Anope::string>("webcpanel_id");
+    na->Shrink<Anope::string>("webcpanel_ip");
 
-	reply.error = HTTP_FOUND;
-	reply.headers["Location"] = Anope::string("http") + (server->IsSSL() ? "s" : "") + "://" + message.headers["Host"] + "/";
-	return true;
+    reply.error = HTTP_FOUND;
+    reply.headers["Location"] = Anope::string("http") + (server->IsSSL() ? "s" : "")
+                                + "://" + message.headers["Host"] + "/";
+    return true;
 }

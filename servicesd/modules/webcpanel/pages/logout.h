@@ -5,15 +5,15 @@
  * Please read COPYING and README for further details.
  */
 
-namespace WebCPanel
-{
+namespace WebCPanel {
 
-class Logout : public WebPanelProtectedPage
-{
- public:
-	Logout(const Anope::string &u);
+class Logout : public WebPanelProtectedPage {
+  public:
+    Logout(const Anope::string &u);
 
-	bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *, HTTPMessage &, HTTPReply &, NickAlias *, TemplateFileServer::Replacements &) anope_override;
+    bool OnRequest(HTTPProvider *, const Anope::string &, HTTPClient *,
+                   HTTPMessage &, HTTPReply &, NickAlias *,
+                   TemplateFileServer::Replacements &) anope_override;
 };
 
 }

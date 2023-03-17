@@ -8,19 +8,17 @@
 #include "modules/httpd.h"
 
 /* A basic file server. Used for serving non-static non-binary content on disk. */
-class TemplateFileServer
-{
-	Anope::string file_name;
- public:
-	struct Replacements : std::multimap<Anope::string, Anope::string>
-	{
-		Anope::string& operator[](const Anope::string &key)
-		{
-			return insert(std::make_pair(key, ""))->second;
-		}
-	};
+class TemplateFileServer {
+    Anope::string file_name;
+  public:
+    struct Replacements : std::multimap<Anope::string, Anope::string> {
+        Anope::string& operator[](const Anope::string &key) {
+            return insert(std::make_pair(key, ""))->second;
+        }
+    };
 
-	TemplateFileServer(const Anope::string &f_n);
+    TemplateFileServer(const Anope::string &f_n);
 
-	void Serve(HTTPProvider *, const Anope::string &, HTTPClient *, HTTPMessage &, HTTPReply &, Replacements &);
+    void Serve(HTTPProvider *, const Anope::string &, HTTPClient *, HTTPMessage &,
+               HTTPReply &, Replacements &);
 };
