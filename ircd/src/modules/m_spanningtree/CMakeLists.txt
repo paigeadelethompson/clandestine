@@ -51,4 +51,4 @@ add_library(m_spanningtree
 set_target_properties(m_spanningtree PROPERTIES PREFIX ""
   VERSION ${PROJECT_VERSION}
   COMPILE_DEFINITIONS "MODNAME=\"m_spanningtree\"")
-install(TARGETS m_spanningtree DESTINATION lib/clandestine/modules/)
+install(TARGETS m_spanningtree DESTINATION lib/clandestine/ircd/modules/spanningtree)

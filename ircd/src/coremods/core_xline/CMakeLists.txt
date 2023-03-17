@@ -13,4 +13,4 @@ set_target_properties(core_xline PROPERTIES PREFIX ""
 
 target_link_libraries(core_xline clandestine)
 
-install(TARGETS core_xline DESTINATION lib/clandestine/coremods)
+install(TARGETS core_xline DESTINATION lib/clandestine/ircd/coremods)

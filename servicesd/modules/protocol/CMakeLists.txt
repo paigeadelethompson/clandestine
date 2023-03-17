@@ -3,5 +3,5 @@ set_target_properties(inspircd3 PROPERTIES PREFIX ""
   VERSION ${PROJECT_VERSION}
   COMPILE_DEFINITIONS "MODNAME=\"inspircd3\"")
 target_link_libraries(inspircd3 services)
-install(TARGETS inspircd3 DESTINATION lib/clandestine/servicesd/modules)
+install(TARGETS inspircd3 DESTINATION lib/clandestine/servicesd/modules/protocol)
 
