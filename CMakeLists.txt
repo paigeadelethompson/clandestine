@@ -15,7 +15,7 @@ set(VERSION_PATCH 0)
 set(VERSION_EXTRA "none")
 set(BUILD 0)
 
-#set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 find_package(utf8cpp REQUIRED)
 find_package(openldap)
