@@ -1,4 +1,4 @@
-add_library(core_xline
+add_library(core_xline MODULE
 cmd_eline.cpp
 cmd_gline.cpp
 cmd_kline.cpp
@@ -8,7 +8,6 @@ core_xline.cpp)
 
 set_target_properties(core_xline PROPERTIES PREFIX ""
   VERSION ${PROJECT_VERSION}
-  SOVERSION 1
   COMPILE_DEFINITIONS "MODNAME=\"core_xline\"")
 
 target_link_libraries(core_xline clandestine)

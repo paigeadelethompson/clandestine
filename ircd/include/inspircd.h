@@ -597,7 +597,9 @@ class CoreExport InspIRCd {
      * it will repeatedly loop.
      */
     void Run();
-
+    
+    static void __run(int argc, char **argv);
+    
     char* GetReadBuffer() {
         return this->ReadBuffer;
     }

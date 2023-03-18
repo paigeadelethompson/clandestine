@@ -1,4 +1,4 @@
-add_library(core_user
+add_library(core_user MODULE
 cmd_away.cpp
 cmd_ison.cpp
 cmd_nick.cpp
@@ -12,7 +12,6 @@ umode_s.cpp)
 
 set_target_properties(core_user PROPERTIES PREFIX ""
   VERSION ${PROJECT_VERSION}
-  SOVERSION 1
   COMPILE_DEFINITIONS "MODNAME=\"core_user\"")
 
 target_link_libraries(core_user clandestine)

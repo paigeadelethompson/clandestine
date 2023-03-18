@@ -1,4 +1,4 @@
-add_library(core_channel
+add_library(core_channel MODULE
   cmd_invite.cpp
   cmd_join.cpp
   cmd_kick.cpp

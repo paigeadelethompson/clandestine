@@ -1,4 +1,4 @@
-add_library(core_oper
+add_library(core_oper MODULE
 cmd_die.cpp
 cmd_kill.cpp
 cmd_oper.cpp
@@ -8,7 +8,6 @@ core_oper.cpp)
 
 set_target_properties(core_oper PROPERTIES PREFIX ""
   VERSION ${PROJECT_VERSION}
-  SOVERSION 1
   COMPILE_DEFINITIONS "MODNAME=\"core_oper\"")
 
 target_link_libraries(core_oper clandestine)

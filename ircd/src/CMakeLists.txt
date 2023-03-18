@@ -4,7 +4,7 @@ add_subdirectory(socketengines/)
 
 add_subdirectory(threadengines/)
 
-add_library(clandestine
+add_library(clandestine SHARED
   inspircd.cpp
   bancache.cpp
   base.cpp
@@ -48,7 +48,7 @@ target_link_libraries(clandestine
   socketengines
   threadengines)
 
-add_executable(ircd inspircd.cpp)
+add_executable(ircd main.cpp)
 
 target_include_directories(ircd PUBLIC
   ../include)

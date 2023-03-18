@@ -6,3 +6,5 @@ cmake-build-release/
 *.o
 CMakeCache.txt
 build/
+.DS_Store
+ircd/.DS_Store

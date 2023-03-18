@@ -1,4 +1,4 @@
-add_library(core_info
+add_library(core_info MODULE
   cmd_admin.cpp
   cmd_commands.cpp
   cmd_info.cpp
@@ -11,7 +11,6 @@ add_library(core_info
 
 set_target_properties(core_info PROPERTIES PREFIX ""
   VERSION ${PROJECT_VERSION}
-  SOVERSION 1
   COMPILE_DEFINITIONS "MODNAME=\"core_info\"")
 
 target_link_libraries(core_info clandestine)

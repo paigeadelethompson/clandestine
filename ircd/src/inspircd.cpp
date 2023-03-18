@@ -729,15 +729,8 @@ void InspIRCd::SetSignal(int signal) {
     s_signal = signal;
 }
 
-/* On posix systems, the flow of the program starts right here, with
- * ENTRYPOINT being a #define that defines main(). On Windows, ENTRYPOINT
- * defines smain() and the real main() is in the service code under
- * win32service.cpp. This allows the service control manager to control
- * the process where we are running as a windows service.
- */
-ENTRYPOINT {
+void InspIRCd::__run(int argc, char **argv) {
     new InspIRCd(argc, argv);
     ServerInstance->Run();
     delete ServerInstance;
-    return 0;
 }
