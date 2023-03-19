@@ -430,7 +430,7 @@ if(pcre_FOUND)
   set_target_properties(m_regex_pcre PROPERTIES PREFIX ""
     VERSION ${PROJECT_VERSION}
     COMPILE_DEFINITIONS "MODNAME=\"m_regex_pcre\"")
-  target_link_libraries(m_regex_pcre clandestine pcre)
+  target_link_libraries(m_regex_pcre clandestine pcre::libpcre)
   install(TARGETS m_regex_pcre DESTINATION lib/clandestine/ircd/modules/)
 endif()
 
