@@ -29,5 +29,3 @@ RUN apt -y autoremove --yes
 RUN rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 WORKDIR / 
-
-RUN rm -rf /mnt/clandestine

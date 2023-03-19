@@ -400,12 +400,12 @@ set_target_properties(m_owoifier PROPERTIES PREFIX ""
 target_link_libraries(m_owoifier clandestine)
 install(TARGETS m_owoifier DESTINATION lib/clandestine/ircd/modules/)
 
-if(postgresql_FOUND)
+if(PostgreSQL_FOUND)
   add_library(m_pgsql MODULE m_pgsql.cpp)
   set_target_properties(m_pgsql PROPERTIES PREFIX ""
     VERSION ${PROJECT_VERSION}
     COMPILE_DEFINITIONS "MODNAME=\"m_pgsql\"")
-  target_link_libraries(m_pgsql clandestine PostgreSQL::PostgreSQL)
+  target_link_libraries(m_pgsql clandestine libpq::pq)
   install(TARGETS m_pgsql DESTINATION lib/clandestine/ircd/modules/)
 endif()
 
@@ -430,7 +430,7 @@ if(pcre_FOUND)
   set_target_properties(m_regex_pcre PROPERTIES PREFIX ""
     VERSION ${PROJECT_VERSION}
     COMPILE_DEFINITIONS "MODNAME=\"m_regex_pcre\"")
-  target_link_libraries(m_regex_pcre clandestine pcre::libpcre)
+  target_link_libraries(m_regex_pcre clandestine pcre)
   install(TARGETS m_regex_pcre DESTINATION lib/clandestine/ircd/modules/)
 endif()
 
@@ -439,7 +439,7 @@ if(pcre2_FOUND)
   set_target_properties(m_regex_pcre2 PROPERTIES PREFIX ""
     VERSION ${PROJECT_VERSION}
     COMPILE_DEFINITIONS "MODNAME=\"m_regex_pcre2\"")
-  target_link_libraries(m_regex_pcre2 clandestine pcre2::pcre2)
+  target_link_libraries(m_regex_pcre2 clandestine PCRE2::8BIT)
   install(TARGETS m_regex_pcre2 DESTINATION lib/clandestine/ircd/modules/)
 endif()
 
@@ -545,12 +545,14 @@ set_target_properties(m_solvemsg PROPERTIES PREFIX ""
 target_link_libraries(m_solvemsg clandestine)
 install(TARGETS m_solvemsg DESTINATION lib/clandestine/ircd/modules/)
 
-add_library(m_sqlite3 MODULE m_sqlite3.cpp)
-set_target_properties(m_sqlite3 PROPERTIES PREFIX ""
-  VERSION ${PROJECT_VERSION}
-  COMPILE_DEFINITIONS "MODNAME=\"m_sqlite3\"")
-target_link_libraries(m_sqlite3 clandestine SQLite::SQLite3)
-install(TARGETS m_sqlite3 DESTINATION lib/clandestine/ircd/modules/)
+if(SQLite3_FOUND)
+  add_library(m_sqlite3 MODULE m_sqlite3.cpp)
+  set_target_properties(m_sqlite3 PROPERTIES PREFIX ""
+    VERSION ${PROJECT_VERSION}
+    COMPILE_DEFINITIONS "MODNAME=\"m_sqlite3\"")
+  target_link_libraries(m_sqlite3 clandestine SQLite::SQLite3)
+  install(TARGETS m_sqlite3 DESTINATION lib/clandestine/ircd/modules/)
+endif()
 
 if(gnutls_FOUND)
   add_library(m_ssl_gnutls MODULE m_ssl_gnutls.cpp)
@@ -566,16 +568,18 @@ if(mbedtls_FOUND)
   set_target_properties(m_ssl_mbedtls PROPERTIES PREFIX ""
     VERSION ${PROJECT_VERSION}
     COMPILE_DEFINITIONS "MODNAME=\"m_ssl_mbedtls\"")
-  target_link_libraries(m_ssl_mbedtls MbedTLS::mbedtls MbedTLS::mbedx509 MbedTLS::mbedcrypto)
+  target_link_libraries(m_ssl_mbedtls MbedTLS)
   install(TARGETS m_ssl_mbedtls DESTINATION lib/clandestine/ircd/modules/)
 endif()
 
-add_library(m_ssl_openssl MODULE m_ssl_openssl.cpp)
-set_target_properties(m_ssl_openssl PROPERTIES PREFIX ""
-  VERSION ${PROJECT_VERSION}
-  COMPILE_DEFINITIONS "MODNAME=\"m_ssl_openssl\"")
-target_link_libraries(m_ssl_openssl clandestine openssl::openssl)
-install(TARGETS m_ssl_openssl DESTINATION lib/clandestine/ircd/modules/)
+if(OpenSSL_FOUND)
+  add_library(m_ssl_openssl MODULE m_ssl_openssl.cpp)
+  set_target_properties(m_ssl_openssl PROPERTIES PREFIX ""
+    VERSION ${PROJECT_VERSION}
+    COMPILE_DEFINITIONS "MODNAME=\"m_ssl_openssl\"")
+  target_link_libraries(m_ssl_openssl clandestine OpenSSL::SSL)
+  install(TARGETS m_ssl_openssl DESTINATION lib/clandestine/ircd/modules/)
+endif()
 
 add_library(m_sslrehashsignal MODULE m_sslrehashsignal.cpp)
 set_target_properties(m_sslrehashsignal PROPERTIES PREFIX ""

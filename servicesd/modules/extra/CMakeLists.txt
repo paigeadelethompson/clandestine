@@ -44,12 +44,12 @@ target_link_libraries(m_ldap_oper services)
 install(TARGETS m_ldap_oper DESTINATION lib/clandestine/servicesd/modules/extra)
 
 if(mariadb-connector-c_FOUND)
-add_library(m_mysql MODULE m_mysql.cpp)
-set_target_properties(m_mysql PROPERTIES PREFIX ""
+add_library(m_svc_mysql MODULE m_mysql.cpp)
+set_target_properties(m_svc_mysql PROPERTIES PREFIX ""
   VERSION ${PROJECT_VERSION}
-  COMPILE_DEFINITIONS "MODNAME=\"m_mysql\"")
-target_link_libraries(m_mysql services)
-install(TARGETS m_mysql DESTINATION lib/clandestine/servicesd/modules/extra)
+  COMPILE_DEFINITIONS "MODNAME=\"m_svc_mysql\"")
+target_link_libraries(m_svc_mysql services)
+install(TARGETS m_svc_mysql DESTINATION lib/clandestine/servicesd/modules/extra)
 endif()
 
 if(pcre_FOUND)
