@@ -1,4 +1,4 @@
-add_library(m_spanningtree
+add_library(m_spanningtree MODULE
   addline.cpp
   away.cpp
   capab.cpp
@@ -51,4 +51,5 @@ add_library(m_spanningtree
 set_target_properties(m_spanningtree PROPERTIES PREFIX ""
   VERSION ${PROJECT_VERSION}
   COMPILE_DEFINITIONS "MODNAME=\"m_spanningtree\"")
-install(TARGETS m_spanningtree DESTINATION lib/clandestine/ircd/modules/spanningtree)
+target_link_libraries(m_spanningtree clandestine)
+install(TARGETS m_spanningtree DESTINATION lib/clandestine/ircd/modules/)

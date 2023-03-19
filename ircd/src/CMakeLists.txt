@@ -58,4 +58,5 @@ target_link_libraries(ircd
   -ldl 
   -pthread)
 
-install(TARGETS ircd DESTINATION sbin)
+install(TARGETS clandestine DESTINATION lib/)
+install(TARGETS ircd DESTINATION sbin/)

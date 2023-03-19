@@ -15,4 +15,4 @@ set_target_properties(core_info PROPERTIES PREFIX ""
 
 target_link_libraries(core_info clandestine)
 
-install(TARGETS core_info DESTINATION lib/clandestine/ircd/coremods)
+install(TARGETS core_info DESTINATION lib/clandestine/ircd/modules)

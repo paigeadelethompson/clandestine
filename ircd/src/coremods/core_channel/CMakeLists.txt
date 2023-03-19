@@ -15,4 +15,4 @@ set_target_properties(core_channel PROPERTIES PREFIX ""
 
 target_link_libraries(core_channel clandestine)
 
-install(TARGETS core_channel DESTINATION lib/clandestine/ircd/coremods)
+install(TARGETS core_channel DESTINATION lib/clandestine/ircd/modules)
