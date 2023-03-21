@@ -2,22 +2,7 @@ add_definitions(-DINSPIRCD_VERSION="${PROJECT_VERSION}")
 
 include_directories(
   ../../include/
-  ${argon2_INCLUDE_DIR}
-  ${http_parser_INCLUDE_DIR}
-  ${libxcrypt_INCLUDE_DIR}
-  ${pcre_INCLUDE_DIR}
-  ${utf8cpp_INCLUDE_DIR}
-  ${hash-library_INCLUDE_DIR}
-  ${maxminddb_INCLUDE_DIR}
-  ${GnuTLS_INCLUDE_DIR}
-  ${mariadb-connector-c_INCLUDE_DIR}
-  ${libqrencode_INCLUDE_DIR}
-  ${re2_INCLUDE_DIR}
-  ${PCRE2_INCLUDE_DIR}
-  ${PostgreSQL_INCLUDE_DIR}
-  ${MbedTLS_INCLUDE_DIR}
-  ${OpenSSL_INCLUDE_DIR}
-  ${SQLite3_INCLUDE_DIR}
+  ../../../lib/hash
   ../../../lib/tre)
 
 add_subdirectory(extra/)
@@ -87,14 +72,12 @@ set_target_properties(m_banredirect PROPERTIES PREFIX ""
 target_link_libraries(m_banredirect clandestine)
 install(TARGETS m_banredirect DESTINATION lib/clandestine/ircd/modules)
 
-if(libxcrypt_FOUND)
-  add_library(m_bcrypt MODULE m_bcrypt.cpp)
-  set_target_properties(m_bcrypt PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_bcrypt\"")
-  target_link_libraries(m_bcrypt clandestine libxcrypt::libxcrypt)
-  install(TARGETS m_bcrypt DESTINATION lib/clandestine/ircd/modules)
-endif()
+add_library(m_bcrypt MODULE m_bcrypt.cpp)
+set_target_properties(m_bcrypt PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_bcrypt\"")
+target_link_libraries(m_bcrypt clandestine crypt)
+install(TARGETS m_bcrypt DESTINATION lib/clandestine/ircd/modules)
 
 add_library(m_blockamsg MODULE m_blockamsg.cpp)
 set_target_properties(m_blockamsg PROPERTIES PREFIX ""
@@ -1056,14 +1039,12 @@ set_target_properties(m_sha1 PROPERTIES PREFIX ""
 target_link_libraries(m_sha1 clandestine)
 install(TARGETS m_sha1 DESTINATION lib/clandestine/ircd/modules)
 
-if(hash-library_FOUND)
-  add_library(m_sha256 MODULE m_sha256.cpp)
-  set_target_properties(m_sha256 PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_sha256\"")
-  target_link_libraries(m_sha256 clandestine hash-library::hash-library)
-  install(TARGETS m_sha256 DESTINATION lib/clandestine/ircd/modules)
-endif()
+add_library(m_sha256 MODULE m_sha256.cpp)
+set_target_properties(m_sha256 PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_sha256\"")
+target_link_libraries(m_sha256 clandestine clandestine_hash)
+install(TARGETS m_sha256 DESTINATION lib/clandestine/ircd/modules)
 
 add_library(m_showfile MODULE m_showfile.cpp)
 set_target_properties(m_showfile PROPERTIES PREFIX ""

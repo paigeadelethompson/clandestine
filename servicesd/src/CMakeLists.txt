@@ -8,7 +8,7 @@ configure_file(../include/sysconf.h.cmake generated/include/sysconf.h)
 
 add_subdirectory(socketengines/)
 
-add_library(services 
+add_library(clandestine_services 
   main.cpp
   access.cpp
   account.cpp
@@ -49,33 +49,19 @@ add_library(services
   users.cpp
   xline.cpp)
 
-target_include_directories(services PUBLIC
-  ${CMAKE_CURRENT_BINARY_DIR}/generated/include/
+target_include_directories(clandestine_services PUBLIC
   ../include/
-  ${argon2_INCLUDE_DIR}
-  ${http_parser_INCLUDE_DIR}
-  ${libxcrypt_INCLUDE_DIR}
-  ${pcre_INCLUDE_DIR}
-  ${utf8cpp_INCLUDE_DIR}
-  ${hash-library_INCLUDE_DIR}
-  ${maxminddb_INCLUDE_DIR}
-  ${GnuTLS_INCLUDE_DIR}
-  ${mariadb-connector-c_INCLUDE_DIR}
-  ${libqrencode_INCLUDE_DIR}
-  ${re2_INCLUDE_DIR}
-  ${PCRE2_INCLUDE_DIR}
-  ${PostgreSQL_INCLUDE_DIR}
-  ${MbedTLS_INCLUDE_DIR}
-  ${OpenSSL_INCLUDE_DIR}
-  ${SQLite3_INCLUDE_DIR}
+  ${CMAKE_CURRENT_BINARY_DIR}/generated/include/
   ../../lib/tre/)
 
-target_link_libraries(services
-  socketengines_services)
+target_link_libraries(clandestine_services
+  clandestine_services_socketengines)
+
+install(TARGETS clandestine_services DESTINATION lib)
 
 add_executable(servicesd main.cpp)
 target_link_libraries(servicesd
-  services
+  clandestine_services
   -ldl
   -pthread)
 

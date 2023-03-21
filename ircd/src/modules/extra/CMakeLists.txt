@@ -1,11 +1,9 @@
-if(argon2_FOUND)
-  add_library(m_argon2 MODULE m_argon2.cpp)
-  set_target_properties(m_argon2 PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_argon2\"")
-  target_link_libraries(m_argon2 clandestine argon2::argon2)
-  install(TARGETS m_argon2 DESTINATION lib/clandestine/ircd/modules/)
-endif()
+add_library(m_argon2 MODULE m_argon2.cpp)
+set_target_properties(m_argon2 PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_argon2\"")
+target_link_libraries(m_argon2 clandestine argon2)
+install(TARGETS m_argon2 DESTINATION lib/clandestine/ircd/modules/)
 
 add_library(m_asciiswitch MODULE m_asciiswitch.cpp)
 set_target_properties(m_asciiswitch PROPERTIES PREFIX ""
@@ -400,23 +398,19 @@ set_target_properties(m_owoifier PROPERTIES PREFIX ""
 target_link_libraries(m_owoifier clandestine)
 install(TARGETS m_owoifier DESTINATION lib/clandestine/ircd/modules/)
 
-if(PostgreSQL_FOUND)
-  add_library(m_pgsql MODULE m_pgsql.cpp)
-  set_target_properties(m_pgsql PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_pgsql\"")
-  target_link_libraries(m_pgsql clandestine libpq::pq)
-  install(TARGETS m_pgsql DESTINATION lib/clandestine/ircd/modules/)
-endif()
+add_library(m_pgsql MODULE m_pgsql.cpp)
+set_target_properties(m_pgsql PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_pgsql\"")
+target_link_libraries(m_pgsql clandestine pq)
+install(TARGETS m_pgsql DESTINATION lib/clandestine/ircd/modules/)
 
-if(libqrencode_FOUND)
-  add_library(m_qrcode MODULE m_qrcode.cpp)
-  set_target_properties(m_qrcode PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_qrcode\"")
-  target_link_libraries(m_qrcode clandestine libqrencode::libqrencode)
-  install(TARGETS m_qrcode DESTINATION lib/clandestine/ircd/modules/)
-endif()
+add_library(m_qrcode MODULE m_qrcode.cpp)
+set_target_properties(m_qrcode PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_qrcode\"")
+target_link_libraries(m_qrcode clandestine qrencode)
+install(TARGETS m_qrcode DESTINATION lib/clandestine/ircd/modules/)
 
 add_library(m_randomnotice MODULE m_randomnotice.cpp)
 set_target_properties(m_randomnotice PROPERTIES PREFIX ""
@@ -425,39 +419,33 @@ set_target_properties(m_randomnotice PROPERTIES PREFIX ""
 target_link_libraries(m_randomnotice clandestine)
 install(TARGETS m_randomnotice DESTINATION lib/clandestine/ircd/modules/)
 
-if(pcre_FOUND)
-  add_library(m_regex_pcre MODULE m_regex_pcre.cpp)
-  set_target_properties(m_regex_pcre PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_regex_pcre\"")
-  target_link_libraries(m_regex_pcre clandestine pcre::libpcre)
-  install(TARGETS m_regex_pcre DESTINATION lib/clandestine/ircd/modules/)
-endif()
+add_library(m_regex_pcre MODULE m_regex_pcre.cpp)
+set_target_properties(m_regex_pcre PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_regex_pcre\"")
+target_link_libraries(m_regex_pcre clandestine pcre)
+install(TARGETS m_regex_pcre DESTINATION lib/clandestine/ircd/modules/)
 
-if(pcre2_FOUND)
-  add_library(m_regex_pcre2 MODULE m_regex_pcre2.cpp)
-  set_target_properties(m_regex_pcre2 PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_regex_pcre2\"")
-  target_link_libraries(m_regex_pcre2 clandestine PCRE2::8BIT)
-  install(TARGETS m_regex_pcre2 DESTINATION lib/clandestine/ircd/modules/)
-endif()
+add_library(m_regex_pcre2 MODULE m_regex_pcre2.cpp)
+set_target_properties(m_regex_pcre2 PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_regex_pcre2\"")
+target_link_libraries(m_regex_pcre2 clandestine pcre2-8)
+install(TARGETS m_regex_pcre2 DESTINATION lib/clandestine/ircd/modules/)
 
 add_library(m_regex_posix MODULE m_regex_posix.cpp)
 set_target_properties(m_regex_posix PROPERTIES PREFIX ""
   VERSION ${PROJECT_VERSION}
   COMPILE_DEFINITIONS "MODNAME=\"m_regex_posix\"")
-target_link_libraries(m_regex_posix clandestine tre)
+target_link_libraries(m_regex_posix clandestine clandestine_tre)
 install(TARGETS m_regex_posix DESTINATION lib/clandestine/ircd/modules/)
 
-if(re2_FOUND)
-  add_library(m_regex_re2 MODULE m_regex_re2.cpp)
-  set_target_properties(m_regex_re2 PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_regex_re2\"")
-  target_link_libraries(m_regex_re2 clandestine re2::re2)
+add_library(m_regex_re2 MODULE m_regex_re2.cpp)
+set_target_properties(m_regex_re2 PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_regex_re2\"")
+target_link_libraries(m_regex_re2 clandestine re2)
   install(TARGETS m_regex_re2 DESTINATION lib/clandestine/ircd/modules/)
-endif()
 
 add_library(m_regex_stdlib MODULE m_regex_stdlib.cpp)
 set_target_properties(m_regex_stdlib PROPERTIES PREFIX ""
@@ -470,7 +458,7 @@ add_library(m_regex_tre MODULE m_regex_tre.cpp)
 set_target_properties(m_regex_tre PROPERTIES PREFIX ""
   VERSION ${PROJECT_VERSION}
   COMPILE_DEFINITIONS "MODNAME=\"m_regex_tre\"")
-target_link_libraries(m_regex_tre clandestine tre)
+target_link_libraries(m_regex_tre clandestine clandestine_tre)
 install(TARGETS m_regex_tre DESTINATION lib/clandestine/ircd/modules/)
 
 add_library(m_relaymsg MODULE m_relaymsg.cpp)
@@ -515,14 +503,12 @@ set_target_properties(m_samove PROPERTIES PREFIX ""
 target_link_libraries(m_samove clandestine)
 install(TARGETS m_samove DESTINATION lib/clandestine/ircd/modules/)
 
-if(hash-library_FOUND)
-  add_library(m_sha3 MODULE m_sha3.cpp)
-  set_target_properties(m_sha3 PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_sha3\"")
-  target_link_libraries(m_sha3 clandestine hash-library::hash-library)
-  install(TARGETS m_sha3 DESTINATION lib/clandestine/ircd/modules/)
-endif()
+add_library(m_sha3 MODULE m_sha3.cpp)
+set_target_properties(m_sha3 PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_sha3\"")
+target_link_libraries(m_sha3 clandestine clandestine_hash)
+install(TARGETS m_sha3 DESTINATION lib/clandestine/ircd/modules/)
 
 add_library(m_shed_users MODULE m_shed_users.cpp)
 set_target_properties(m_shed_users PROPERTIES PREFIX ""
@@ -545,41 +531,33 @@ set_target_properties(m_solvemsg PROPERTIES PREFIX ""
 target_link_libraries(m_solvemsg clandestine)
 install(TARGETS m_solvemsg DESTINATION lib/clandestine/ircd/modules/)
 
-if(SQLite3_FOUND)
-  add_library(m_sqlite3 MODULE m_sqlite3.cpp)
-  set_target_properties(m_sqlite3 PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_sqlite3\"")
-  target_link_libraries(m_sqlite3 clandestine SQLite::SQLite3)
-  install(TARGETS m_sqlite3 DESTINATION lib/clandestine/ircd/modules/)
-endif()
+add_library(m_sqlite3 MODULE m_sqlite3.cpp)
+set_target_properties(m_sqlite3 PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_sqlite3\"")
+target_link_libraries(m_sqlite3 clandestine sqlite3)
+install(TARGETS m_sqlite3 DESTINATION lib/clandestine/ircd/modules/)
 
-if(gnutls_FOUND)
-  add_library(m_ssl_gnutls MODULE m_ssl_gnutls.cpp)
-  set_target_properties(m_ssl_gnutls PROPERTIES PREFIX ""
-   VERSION ${PROJECT_VERSION}
-   COMPILE_DEFINITIONS "MODNAME=\"m_ssl_gnutls\"")
-  target_link_libraries(m_ssl_gnutls clandestine GnuTLS::GnuTLS)
-  install(TARGETS m_ssl_gnutls DESTINATION lib/clandestine/ircd/modules/)
-endif()
+add_library(m_ssl_gnutls MODULE m_ssl_gnutls.cpp)
+set_target_properties(m_ssl_gnutls PROPERTIES PREFIX ""
+ VERSION ${PROJECT_VERSION}
+ COMPILE_DEFINITIONS "MODNAME=\"m_ssl_gnutls\"")
+target_link_libraries(m_ssl_gnutls clandestine gnutls)
+install(TARGETS m_ssl_gnutls DESTINATION lib/clandestine/ircd/modules/)
 
-if(mbedtls_FOUND)
-  add_library(m_ssl_mbedtls MODULE m_ssl_mbedtls.cpp)
-  set_target_properties(m_ssl_mbedtls PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_ssl_mbedtls\"")
-  target_link_libraries(m_ssl_mbedtls MbedTLS)
-  install(TARGETS m_ssl_mbedtls DESTINATION lib/clandestine/ircd/modules/)
-endif()
+add_library(m_ssl_mbedtls MODULE m_ssl_mbedtls.cpp)
+set_target_properties(m_ssl_mbedtls PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_ssl_mbedtls\"")
+target_link_libraries(m_ssl_mbedtls mbedtls)
+install(TARGETS m_ssl_mbedtls DESTINATION lib/clandestine/ircd/modules/)
 
-if(OpenSSL_FOUND)
-  add_library(m_ssl_openssl MODULE m_ssl_openssl.cpp)
-  set_target_properties(m_ssl_openssl PROPERTIES PREFIX ""
-    VERSION ${PROJECT_VERSION}
-    COMPILE_DEFINITIONS "MODNAME=\"m_ssl_openssl\"")
-  target_link_libraries(m_ssl_openssl clandestine OpenSSL::SSL)
-  install(TARGETS m_ssl_openssl DESTINATION lib/clandestine/ircd/modules/)
-endif()
+add_library(m_ssl_openssl MODULE m_ssl_openssl.cpp)
+set_target_properties(m_ssl_openssl PROPERTIES PREFIX ""
+  VERSION ${PROJECT_VERSION}
+  COMPILE_DEFINITIONS "MODNAME=\"m_ssl_openssl\"")
+target_link_libraries(m_ssl_openssl clandestine ssl)
+install(TARGETS m_ssl_openssl DESTINATION lib/clandestine/ircd/modules/)
 
 add_library(m_sslrehashsignal MODULE m_sslrehashsignal.cpp)
 set_target_properties(m_sslrehashsignal PROPERTIES PREFIX ""

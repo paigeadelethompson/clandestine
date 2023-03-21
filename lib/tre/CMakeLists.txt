@@ -16,7 +16,7 @@ remove_definitions(-DHAVE_LIBUTF8_H=1)
 remove_definitions(-DTRE_USE_SYSTEM_REGEX_H=1)
 remove_definitions(-DTRE_MULTIBYTE=1)
 
-add_library(tre
+add_library(clandestine_tre
   regcomp.c
   regerror.c
   regexec.c
@@ -30,3 +30,5 @@ add_library(tre
   tre-parse.c
   tre-stack.c
   xmalloc.c)
+
+install(TARGETS clandestine_tre DESTINATION lib/)
