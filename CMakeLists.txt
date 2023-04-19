@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16.3)
 
 project(clandestine)
 
+set(CMAKE_INSTALL_PREFIX /usr)
 set(CMAKE_CXX_STANDARD 11)
 set(PROJECT_VERSION "clandestine-IRCd-3.15.0")
 set(CMAKE_BUILD_TYPE Release)
