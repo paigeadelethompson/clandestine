@@ -29,19 +29,19 @@
 #define INSPIRCD_VERSION_SINCE(MAJOR, MINOR) (((3 << 8) | 15) >= ((MAJOR << 8) | (MINOR)))
 
 /** The default location that config files are stored in. */
-#define INSPIRCD_CONFIG_PATH "/etc/clandestine/"
+#define INSPIRCD_CONFIG_PATH "/etc/clandestine"
 
 /** The default location that data files are stored in. */
-#define INSPIRCD_DATA_PATH "/var/lib/clandestine/"
+#define INSPIRCD_DATA_PATH "/var/lib/clandestine"
 
 /** The default location that log files are stored in. */
-#define INSPIRCD_LOG_PATH "/var/log/clandestine/"
+#define INSPIRCD_LOG_PATH "/var/log/clandestine"
 
 /** The default location that module files are stored in. */
-#define INSPIRCD_MODULE_PATH "/usr/lib/clandestine/ircd/modules/"
+#define INSPIRCD_MODULE_PATH "/usr/lib/clandestine/ircd/modules"
 
 /** The default location that runtime files are stored in. */
-#define INSPIRCD_RUNTIME_PATH "/tmp/clandestine/"
+#define INSPIRCD_RUNTIME_PATH "/tmp/clandestine"
 
 /** The URL of the InspIRCd docs site. */
 #define INSPIRCD_DOCS "https://github.com/paigeadelethompson/clandestine"

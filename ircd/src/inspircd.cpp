@@ -476,7 +476,7 @@ void InspIRCd::WritePID(const std::string& filename, bool exitonfail) {
 
 InspIRCd::InspIRCd(int argc, char** argv)
     : FakeClient(NULL)
-    , ConfigFileName(INSPIRCD_CONFIG_PATH "/inspircd.conf")
+    , ConfigFileName(INSPIRCD_CONFIG_PATH "/clandestine.conf")
     , ConfigThread(NULL)
     , Config(NULL)
     , XLines(NULL)
