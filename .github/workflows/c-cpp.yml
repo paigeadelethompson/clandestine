@@ -31,7 +31,7 @@ jobs:
       id: date
       run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
     - name: create archive
-      run: tar -cvf - /usr/local/sbin/ircd /usr/local/sbin/servicesd /usr/local/lib/clandestine | xz -9 > ${{vars.PROJECT_VERSION}}-${{BUILD_DATE}}.tar.XZ
+      run: tar -cvf - /usr/local/sbin/ircd /usr/local/sbin/servicesd /usr/local/lib/clandestine | xz -9 > ${{vars.PROJECT_VERSION}}-$BUILD_DATE.tar.XZ
       env:
         BUILD_DATE: ${{ steps.date.outputs.date }}
     - name: Create GH release
@@ -40,8 +40,8 @@ jobs:
       with:
         draft: true
         prerelease: false
-        release_name: ${{vars.PROJECT_VERSION}}-${{BUILD_DATE}}
-        tag_name: ${{vars.PROJECT_VERSION}}-${{BUILD_DATE}}
+        release_name: ${{vars.PROJECT_VERSION}}-$BUILD_DATE
+        tag_name: ${{vars.PROJECT_VERSION}}-$BUILD_DATE
       env:
         GITHUB_TOKEN: ${{ github.token }}
         BUILD_DATE: ${{ steps.date.outputs.date }}
@@ -52,6 +52,6 @@ jobs:
         BUILD_DATE: ${{ steps.date.outputs.date }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./${{vars.PROJECT_VERSION}}-${{BUILD_DATE}}.tar.XZ
-        asset_name: ${{vars.PROJECT_VERSION}}-${{BUILD_DATE}}.tar.XZ
+        asset_path: ./${{vars.PROJECT_VERSION}}-$BUILD_DATE.tar.XZ
+        asset_name: ${{vars.PROJECT_VERSION}}-$BUILD_DATE.tar.XZ
         asset_content_type: application/x-xz
