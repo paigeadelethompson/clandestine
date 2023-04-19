@@ -30,5 +30,3 @@ add_library(clandestine_tre
   tre-parse.c
   tre-stack.c
   xmalloc.c)
-
-install(TARGETS clandestine_tre DESTINATION lib/)
