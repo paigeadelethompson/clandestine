@@ -20,7 +20,7 @@
 #pragma once
 
 /** The branch version that is shown to unprivileged users. */
-#define INSPIRCD_BRANCH "InspIRCd-3"
+#define INSPIRCD_BRANCH "ClandestineIRCd-3"
 
 /** Determines whether this version of InspIRCd is older than the requested version. */
 #define INSPIRCD_VERSION_BEFORE(MAJOR, MINOR) (((3 << 8) | 15) < ((MAJOR << 8) | (MINOR)))
@@ -29,22 +29,22 @@
 #define INSPIRCD_VERSION_SINCE(MAJOR, MINOR) (((3 << 8) | 15) >= ((MAJOR << 8) | (MINOR)))
 
 /** The default location that config files are stored in. */
-#define INSPIRCD_CONFIG_PATH "/Users/paigethompson/inspircd/run/conf"
+#define INSPIRCD_CONFIG_PATH "/etc/clandestine/"
 
 /** The default location that data files are stored in. */
-#define INSPIRCD_DATA_PATH "/Users/paigethompson/inspircd/run/data"
+#define INSPIRCD_DATA_PATH "/var/lib/clandestine/"
 
 /** The default location that log files are stored in. */
-#define INSPIRCD_LOG_PATH "/Users/paigethompson/inspircd/run/logs"
+#define INSPIRCD_LOG_PATH "/var/log/clandestine/"
 
 /** The default location that module files are stored in. */
-#define INSPIRCD_MODULE_PATH "/Users/paigethompson/inspircd/run/modules"
+#define INSPIRCD_MODULE_PATH "/usr/lib/clandestine/ircd/modules/"
 
 /** The default location that runtime files are stored in. */
-#define INSPIRCD_RUNTIME_PATH "/Users/paigethompson/inspircd/run/data"
+#define INSPIRCD_RUNTIME_PATH "/tmp/clandestine/"
 
 /** The URL of the InspIRCd docs site. */
-#define INSPIRCD_DOCS "https://docs.inspircd.org/3/"
+#define INSPIRCD_DOCS "https://github.com/paigeadelethompson/clandestine"
 
 #ifndef _WIN32
 
